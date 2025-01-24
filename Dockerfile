@@ -2,6 +2,8 @@ FROM maven:3.8-openjdk-17-slim AS build
 WORKDIR /app
 COPY pom.xml ./
 COPY src ./src
+ARG MICROSERVICIO_SEGURIDAD_URI
+ENV MICROSERVICIO_SEGURIDAD_URI=${MICROSERVICIO_SEGURIDAD_URI}
 RUN mvn clean package 
 
 FROM openjdk:17-jdk-slim
