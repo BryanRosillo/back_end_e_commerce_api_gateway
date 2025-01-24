@@ -11,13 +11,12 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      MICROSERVICIO_SEGURIDAD_URI: ${{ secrets.MICROSERVICIO_SEGURIDAD_URI }}
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-
-    - name: Set environment variable
-      run: echo "MICROSERVICIO_SEGURIDAD_URI=${{ secrets.MICROSERVICIO_SEGURIDAD_URI }}" >> $GITHUB_ENV
 
     - name: Build the Docker image
       run: docker build -t ${{secrets.DOCKER_HUB_USERNAME}}/ec-api-gtw:latest .
