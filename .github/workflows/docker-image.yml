@@ -25,10 +25,7 @@ jobs:
         logout: true
           
     - name: Build the Docker image
-      run: docker build \
-          --build-arg MICROSERVICIO_SEGURIDAD_URI=${{ secrets.MICROSERVICIO_SEGURIDAD_URI }} \
-          --build-arg MICROSERVICIO_PRODUCTOS_URI=${{ secrets.MICROSERVICIO_PRODUCTOS_URI }} \
-          -t ${{secrets.DOCKER_HUB_USERNAME}}/ec-api-gtw:latest .
+      run: docker build --build-arg MICROSERVICIO_SEGURIDAD_URI=${{ secrets.MICROSERVICIO_SEGURIDAD_URI }} --build-arg MICROSERVICIO_PRODUCTOS_URI=${{ secrets.MICROSERVICIO_PRODUCTOS_URI }} -t ${{secrets.DOCKER_HUB_USERNAME}}/ec-api-gtw:latest .
 
     - name: Push Docker image to Docker Hub
       run: docker push ${{secrets.DOCKER_HUB_USERNAME}}/ec-api-gtw:latest
