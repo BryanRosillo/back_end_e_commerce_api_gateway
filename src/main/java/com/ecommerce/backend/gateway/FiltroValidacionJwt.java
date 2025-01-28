@@ -29,9 +29,9 @@ public class FiltroValidacionJwt implements GlobalFilter {
 	public final List<String> RUTAS_PUBLICAS = List.of(
 			"/seguridad/login",
 			"/seguridad/registro",
-			"/seguridad/cambiar-constrasena"
+			"/seguridad/cambiar-contrasena",
+			"/chat-websocket/info"
 	);
-	
 
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -70,5 +70,7 @@ public class FiltroValidacionJwt implements GlobalFilter {
 								});
 								
 	}
+		
+	
 
 }
