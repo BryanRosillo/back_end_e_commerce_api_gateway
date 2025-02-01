@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservicio-api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservicio-api-gateway
+  template:
+    metadata:
+      labels:
+        app: microservicio-api-gateway
+    spec:
+      containers:
+      - name: microservicio-api-gateway
+        image: bryanlrx/ec-api-gtw:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MICROSERVICIO_REGISTRO_URI
+          value: "http://microservicio-registro:8761/eureka/"
+        

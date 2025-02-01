@@ -2,9 +2,7 @@ package com.ecommerce.backend.gateway;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.http.HttpHeaders;
@@ -18,9 +16,6 @@ import reactor.core.publisher.Mono;
 
 @Component
 public class FiltroValidacionJwt implements GlobalFilter {
-	
-	@Value("${url.seguridad}")
-	private String urlSeguridad;
 	
 	@Autowired
 	private WebClient.Builder webClientBuilder;
@@ -50,9 +45,10 @@ public class FiltroValidacionJwt implements GlobalFilter {
 			return exchange.getResponse().setComplete();
 		}
 		
-		return webClientBuilder.build()
+		return webClientBuilder.baseUrl("lb://microservicio-seguridad")
+								.build()
 								.post()
-								.uri(this.urlSeguridad+"/seguridad/validar-token")
+								.uri("/seguridad/validar-token")
 								.header(HttpHeaders.AUTHORIZATION, cabeceraAutorizacion)
 								.retrieve()
 								.bodyToMono(Map.class)
