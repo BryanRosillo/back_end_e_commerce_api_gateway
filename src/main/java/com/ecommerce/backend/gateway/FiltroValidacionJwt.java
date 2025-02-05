@@ -20,7 +20,6 @@ public class FiltroValidacionJwt implements GlobalFilter {
 	@Autowired
 	private WebClient.Builder webClientBuilder;
 	
-	
 	public final List<String> RUTAS_PUBLICAS = List.of(
 			"/seguridad/login",
 			"/seguridad/registro",
@@ -37,7 +36,7 @@ public class FiltroValidacionJwt implements GlobalFilter {
 			    if ("/chat-websocket/info".equals(path)) {
 			        exchange.getResponse().getHeaders().remove("Access-Control-Allow-Origin");
 			        exchange.getResponse().getHeaders().remove("Access-Control-Allow-Credentials");
-			        System.out.println("CABECERAS ELIMINADAS PARA /chat-websocket/info");
+			        System.out.println("CABECERAS ELIMINADAS PARA /chat-websocket/info---------------------------");
    			    }
 			return chain.filter(exchange);
 		}
