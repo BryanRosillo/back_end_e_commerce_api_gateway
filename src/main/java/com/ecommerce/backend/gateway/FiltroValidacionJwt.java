@@ -58,6 +58,8 @@ public class FiltroValidacionJwt implements GlobalFilter {
 																					.mutate()
 																					.header("X-User-ID", idUsuario)
 																					.build();
+									exchange.getResponse().getHeaders().set("Access-Control-Allow-Origin", "*");
+									exchange.getResponse().getHeaders().set("Access-Control-Allow-Credentials", "false");
 									return chain.filter(exchange.mutate().request(requestModificado).build());
 								})
 								.onErrorResume(error -> {
@@ -67,6 +69,4 @@ public class FiltroValidacionJwt implements GlobalFilter {
 								
 	}
 		
-	
-
 }
