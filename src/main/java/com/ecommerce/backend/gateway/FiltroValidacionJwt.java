@@ -34,9 +34,11 @@ public class FiltroValidacionJwt implements GlobalFilter {
 		String path = exchange.getRequest().getURI().getPath();
 		
 		if(RUTAS_PUBLICAS.contains(path)) {
-			exchange.getResponse().getHeaders().remove("Access-Control-Allow-Origin");
-			exchange.getResponse().getHeaders().remove("Access-Control-Allow-Credentials");
-			System.out.println("CABECERAS ELIMINADAS........!");
+			    if ("/chat-websocket/info".equals(path)) {
+			        exchange.getResponse().getHeaders().remove("Access-Control-Allow-Origin");
+			        exchange.getResponse().getHeaders().remove("Access-Control-Allow-Credentials");
+			        System.out.println("CABECERAS ELIMINADAS PARA /chat-websocket/info");
+   			    }
 			return chain.filter(exchange);
 		}
 		
