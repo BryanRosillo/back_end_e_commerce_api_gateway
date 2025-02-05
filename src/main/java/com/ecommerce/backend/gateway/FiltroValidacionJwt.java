@@ -34,6 +34,8 @@ public class FiltroValidacionJwt implements GlobalFilter {
 		String path = exchange.getRequest().getURI().getPath();
 		
 		if(RUTAS_PUBLICAS.contains(path)) {
+			exchange.getResponse().getHeaders().remove("Access-Control-Allow-Origin");
+			exchange.getResponse().getHeaders().remove("Access-Control-Allow-Credentials");
 			return chain.filter(exchange);
 		}
 		
